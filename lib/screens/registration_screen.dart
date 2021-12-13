@@ -2,10 +2,10 @@
 
 import 'package:flutter/material.dart';
 import 'package:login_example/components/blog.dart';
-import 'package:login_example/login_screen.dart';
+import 'package:login_example/screens/login_screen.dart';
 
-import '../database_connection.dart';
-import '../userpass.dart';
+import '../helpers/database_connection.dart';
+import '../helpers/userpass.dart';
 
 class RegistrationScreen extends StatefulWidget {
   static const routeName = '/signup';
@@ -18,8 +18,8 @@ class RegistrationScreen extends StatefulWidget {
 
 class _RegistrationScreenState extends State<RegistrationScreen> {
   String username = '';
-  String firstName = 'firstName';
-  String lastName = 'lastName';
+  String firstName = '';
+  String lastName = '';
   String doorNumber = '';
   String streetAddress = '';
   String city = '';
@@ -38,38 +38,54 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
   }
 
   void onSubmit2() {
-    postData("users", [
-      'first_name',
-      'last_name',
-      'country_code',
-      'phone_numer',
-      'door_numer',
-      'street_address',
-      'city',
-      'country',
-      'zip_code',
-      'emergency_contact',
-      'gender',
-      'customer_type',
-      'email',
-      'pass'
-    ], [
-      "'" + firstName + "'",
-      "'" + lastName + "'",
-      "'" + countryCode + "'",
-      "'" + phoneNumber + "'",
-      "'" + doorNumber + "'",
-      "'" + streetAddress + "'",
-      "'" + city + "'",
-      "'" + country + "'",
-      "'" + zipCode + "'",
-      "'" + contNum + "'",
-      "'" + gender + "'",
-      "'" + customerType + "'",
-      "'" + email + "'",
-      "'" + pass + "'",
-    ]);
-    Navigator.pushNamed(context, LoginScreen.routeName);
+    if (firstName.isEmpty ||
+        lastName.isEmpty ||
+        countryCode.isEmpty ||
+        country.isEmpty ||
+        phoneNumber.isEmpty ||
+        streetAddress.isEmpty ||
+        zipCode.isEmpty ||
+        gender.isEmpty ||
+        doorNumber.isEmpty ||
+        contNum.isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+        content: Text("Enter All Fields"),
+        backgroundColor: Colors.red,
+      ));
+    } else {
+      postData("users", [
+        'first_name',
+        'last_name',
+        'country_code',
+        'phone_numer',
+        'door_numer',
+        'street_address',
+        'city',
+        'country',
+        'zip_code',
+        'emergency_contact',
+        'gender',
+        'customer_type',
+        'email',
+        'pass'
+      ], [
+        "'" + firstName + "'",
+        "'" + lastName + "'",
+        "'" + countryCode + "'",
+        "'" + phoneNumber + "'",
+        "'" + doorNumber + "'",
+        "'" + streetAddress + "'",
+        "'" + city + "'",
+        "'" + country + "'",
+        "'" + zipCode + "'",
+        "'" + contNum + "'",
+        "'" + gender + "'",
+        "'" + customerType + "'",
+        "'" + email + "'",
+        "'" + pass + "'",
+      ]);
+      Navigator.pushNamed(context, LoginScreen.routeName);
+    }
   }
 
   // Future getData() async {

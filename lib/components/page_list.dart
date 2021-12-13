@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import 'components/components.dart';
+import 'components.dart';
 
 const String listItemTitleText = "A BETTER COMPANY FOR INSURANCE";
 const String listItemPreviewText =

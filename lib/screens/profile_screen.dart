@@ -1,21 +1,18 @@
-// ignore_for_file: sized_box_for_whitespace
-
 import 'package:flutter/material.dart';
 import 'package:login_example/components/blog.dart';
-import 'package:login_example/dashboard_screen.dart';
 
-import '../database_connection.dart';
+import '../helpers/database_connection.dart';
+import 'dashboard_screen.dart';
 
-class FlightDetails extends StatefulWidget {
-  static const routeName = '/flight_details';
-
-  const FlightDetails({Key? key}) : super(key: key);
+class ProfileScreen extends StatefulWidget {
+  static const routeName = '/profile_screen';
+  const ProfileScreen({Key? key}) : super(key: key);
 
   @override
-  State<FlightDetails> createState() => _FlightDetailsState();
+  _ProfileScreenState createState() => _ProfileScreenState();
 }
 
-class _FlightDetailsState extends State<FlightDetails> {
+class _ProfileScreenState extends State<ProfileScreen> {
   String mealPlanID = '';
   String cabinClassID = 'firstName';
   String specialRequestID = 'lastName';
@@ -55,7 +52,7 @@ class _FlightDetailsState extends State<FlightDetails> {
                     //   borderRadius: BorderRadius.circular(100.0),
                     // ),
                     child: const Text(
-                      'Fill out your Flight Details',
+                      'Profile Details',
                       style: TextStyle(fontSize: 32),
                     ),
                   ),

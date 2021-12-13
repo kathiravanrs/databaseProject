@@ -2,15 +2,15 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_login/widgets.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:login_example/widgets/flight_details.dart';
-import 'package:login_example/widgets/insurance_details.dart';
-import 'package:login_example/widgets/invoice_details.dart';
-import 'package:login_example/widgets/payment_details.dart';
+import 'package:login_example/screens/flight_details.dart';
+import 'package:login_example/screens/insurance_details.dart';
+import 'package:login_example/screens/passenger_details.dart';
+import 'package:login_example/screens/payment_details.dart';
 
-import 'constants.dart';
-import 'transition_route_observer.dart';
-import 'widgets/fade_in.dart';
-import 'widgets/round_button.dart';
+import '../helpers/constants.dart';
+import '../helpers/transition_route_observer.dart';
+import '../widgets/fade_in.dart';
+import '../widgets/round_button.dart';
 
 class DashboardScreen extends StatefulWidget {
   static const routeName = '/dashboard';
@@ -143,7 +143,7 @@ class _DashboardScreenState extends State<DashboardScreen>
           children: const <Widget>[
             Text('User Dashboard',
                 style: TextStyle(
-                    fontSize: 32,
+                    fontSize: 24,
                     fontWeight: FontWeight.bold,
                     color: Colors.black)),
           ],
@@ -180,7 +180,7 @@ class _DashboardScreenState extends State<DashboardScreen>
     return GridView.count(
       padding: const EdgeInsets.symmetric(
         horizontal: 32.0,
-        vertical: 20,
+        vertical: 10,
       ),
       // childAspectRatio: .9,
       // crossAxisSpacing: 5,
@@ -188,33 +188,25 @@ class _DashboardScreenState extends State<DashboardScreen>
       children: [
         _buildButton(
           route: FlightDetails.routeName,
-          icon: Container(
-            // fix icon is not centered like others for some reasons
-            padding: const EdgeInsets.only(left: 16.0),
-            alignment: Alignment.centerLeft,
-            child: const Icon(
-              FontAwesomeIcons.plane,
-              size: 20,
-            ),
-          ),
+          icon: const Icon(Icons.airplane_ticket),
           label: 'Flight Details',
           interval: const Interval(step, aniInterval + step),
         ),
         _buildButton(
-          route: InvoiceDetails.routeName,
-          icon: const Icon(FontAwesomeIcons.handHoldingUsd),
-          label: 'Invoice',
+          route: PassengerDetails.routeName,
+          icon: const Icon(Icons.people),
+          label: 'Passengers',
           interval: const Interval(step * 2, aniInterval + step * 2),
         ),
         _buildButton(
           route: InsuranceDetails.routeName,
-          icon: const Icon(FontAwesomeIcons.chartLine),
+          icon: const Icon(Icons.document_scanner_rounded),
           label: 'Insurance',
           interval: const Interval(0, aniInterval),
         ),
         _buildButton(
           route: PaymentDetails.routeName,
-          icon: const Icon(FontAwesomeIcons.history),
+          icon: const Icon(Icons.credit_card),
           label: 'Payment',
           interval: const Interval(step * 2, aniInterval + step * 2),
         ),
@@ -244,7 +236,7 @@ class _DashboardScreenState extends State<DashboardScreen>
               children: <Widget>[
                 Column(
                   children: <Widget>[
-                    const SizedBox(height: 40),
+                    const SizedBox(height: 20),
                     Expanded(
                       flex: 2,
                       child: _buildHeader(theme),

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:login_example/login_screen.dart';
+import 'package:login_example/screens/login_screen.dart';
 
 import 'color.dart';
 import 'spacing.dart';
@@ -94,7 +94,7 @@ class ReadMoreButton extends StatelessWidget {
           highlightedBorderColor: textPrimary,
           hoverColor: textPrimary,
           borderSide: BorderSide(color: textPrimary, width: 2),
-          padding: EdgeInsets.symmetric(horizontal: 20),
+          padding: const EdgeInsets.symmetric(horizontal: 20),
           child: Text(
             "READ MORE",
             style: GoogleFonts.montserrat(

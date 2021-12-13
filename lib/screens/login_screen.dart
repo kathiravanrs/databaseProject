@@ -1,15 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart' show timeDilation;
 import 'package:flutter_login/flutter_login.dart';
-import 'package:login_example/database_connection.dart';
-import 'package:login_example/display_page.dart';
-import 'package:login_example/userpass.dart';
-import 'package:login_example/widgets/registration_screen.dart';
+import 'package:login_example/helpers/database_connection.dart';
+import 'package:login_example/helpers/userpass.dart';
+import 'package:login_example/screens/display_page.dart';
+import 'package:login_example/screens/registration_screen.dart';
 
-import 'constants.dart';
-import 'custom_route.dart';
+import '../helpers/constants.dart';
+import '../helpers/custom_route.dart';
 import 'dashboard_screen.dart';
-// import 'users.dart';
 
 class LoginScreen extends StatelessWidget {
   static const routeName = '/auth';

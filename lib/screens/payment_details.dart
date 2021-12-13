@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:login_example/components/blog.dart';
 
-import '../dashboard_screen.dart';
-import '../database_connection.dart';
+import '../helpers/database_connection.dart';
+import 'dashboard_screen.dart';
 
 class PaymentDetails extends StatefulWidget {
   static const routeName = '/payment_details';

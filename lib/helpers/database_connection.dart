@@ -46,9 +46,9 @@ Future getData(String query) async {
   var url =
       Uri.parse('https://databaseprojectfall21.000webhostapp.com/get.php');
   http.Response response = await http.post(url, body: query);
-  print(response.body.toString());
+  // print(response.body.toString());
   var data = jsonDecode(response.body);
-  print(data.toString());
+  // print(data.toString());
   return data;
 }
 

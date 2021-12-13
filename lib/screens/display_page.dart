@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:json_table/json_table.dart';
 
-import 'database_connection.dart';
+import '../helpers/database_connection.dart';
 
 class DisplayPage extends StatefulWidget {
   static const routeName = '/displayPage';
@@ -41,13 +41,14 @@ class _DisplayPageState extends State<DisplayPage> {
                 Widget getTextWidgets(List data) {
                   return SingleChildScrollView(
                     child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: data
-                            .map((item) => Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: JsonTable(item),
-                                ))
-                            .toList()),
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: data
+                          .map((item) => Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: JsonTable(item),
+                              ))
+                          .toList(),
+                    ),
                   );
                 }
 
