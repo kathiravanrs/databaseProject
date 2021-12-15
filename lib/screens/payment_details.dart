@@ -53,7 +53,7 @@ class _PaymentDetailsState extends State<PaymentDetails> {
                     //   borderRadius: BorderRadius.circular(100.0),
                     // ),
                     child: const Text(
-                      'Payment Details',
+                      'Enter Your Payment Details',
                       style: TextStyle(fontSize: 32),
                     ),
                   ),
@@ -65,7 +65,7 @@ class _PaymentDetailsState extends State<PaymentDetails> {
                     child: TextField(
                       onChanged: (text) => mealPlanID = text,
                       decoration: InputDecoration(
-                        hintText: "Choose Meal Plan",
+                        hintText: "Enter your card number",
                         filled: true,
                         fillColor: Colors.purple.withOpacity(.1),
                         contentPadding: const EdgeInsets.all(15),
@@ -84,7 +84,7 @@ class _PaymentDetailsState extends State<PaymentDetails> {
                     child: TextField(
                       onChanged: (text) => cabinClassID = text,
                       decoration: InputDecoration(
-                        hintText: "Enter cabin class",
+                        hintText: "Name on the card",
                         filled: true,
                         fillColor: Colors.purple.withOpacity(.1),
                         contentPadding: const EdgeInsets.all(15),
@@ -103,7 +103,26 @@ class _PaymentDetailsState extends State<PaymentDetails> {
                     child: TextField(
                       onChanged: (text) => specialRequestID = text,
                       decoration: InputDecoration(
-                        hintText: "Enter Special Request",
+                        hintText: "Expiry month and Year (MM/YY)",
+                        filled: true,
+                        fillColor: Colors.purple.withOpacity(.1),
+                        contentPadding: const EdgeInsets.all(15),
+                        errorStyle: const TextStyle(
+                          backgroundColor: Colors.orange,
+                          color: Colors.white,
+                        ),
+                        labelStyle: const TextStyle(fontSize: 12),
+                      ),
+                    ),
+                  ),
+                  divider,
+                  Container(
+                    // padding: EdgeInsets.all(20),
+                    width: 600,
+                    child: TextField(
+                      onChanged: (text) => specialRequestID = text,
+                      decoration: InputDecoration(
+                        hintText: "CVV",
                         filled: true,
                         fillColor: Colors.purple.withOpacity(.1),
                         contentPadding: const EdgeInsets.all(15),
