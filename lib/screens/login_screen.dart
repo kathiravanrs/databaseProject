@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart' show timeDilation;
 import 'package:flutter_login/flutter_login.dart';
 import 'package:login_example/helpers/database_connection.dart';
+import 'package:login_example/helpers/global.dart';
 import 'package:login_example/helpers/userpass.dart';
 import 'package:login_example/screens/display_page.dart';
 import 'package:login_example/screens/registration_screen.dart';
@@ -28,6 +29,8 @@ class LoginScreen extends StatelessWidget {
       var pass = data.password;
 
       if (name == "admin@admin.com" && pass == "admin") {
+        isLoggedIn = true;
+        userEmail = name;
         Navigator.pushNamed(context, DisplayPage.routeName);
       }
 
@@ -36,14 +39,16 @@ class LoginScreen extends StatelessWidget {
         if (js["username"] == name) {
           exists = true;
           if (js["password"] == encode(pass)) {
-            return null;
+            isLoggedIn = true;
+            userEmail = name.toString();
+            Navigator.pushNamed(context, DashboardScreen.routeName);
           } else {
-            return ("Wwrong Password");
+            return ("Wrong Password");
           }
         }
       }
       if (!exists) return ("No user found with the given email");
-      return "null";
+      return null;
     });
   }
 
@@ -254,6 +259,9 @@ class LoginScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    isLoggedIn = false;
+    print(isLoggedIn);
+    print(userEmail);
     // print(userData.toString());
     return SafeArea(
       child: Scaffold(
@@ -269,10 +277,8 @@ class LoginScreen extends StatelessWidget {
             future: getData("Select * from userpass"),
             builder: (BuildContext ctx, AsyncSnapshot snapshot) {
               if (snapshot.data == null) {
-                return Container(
-                  child: const Center(
-                    child: CircularProgressIndicator(),
-                  ),
+                return const Center(
+                  child: CircularProgressIndicator(),
                 );
               } else {
                 userData = snapshot.data;

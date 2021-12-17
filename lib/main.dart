@@ -4,6 +4,7 @@ import 'package:login_example/components/page_list.dart';
 import 'package:login_example/screens/display_page.dart';
 import 'package:login_example/screens/flight_details.dart';
 import 'package:login_example/screens/insurance_details.dart';
+import 'package:login_example/screens/invoice_page.dart';
 import 'package:login_example/screens/passenger_details.dart';
 import 'package:login_example/screens/payment_details.dart';
 import 'package:login_example/screens/profile_screen.dart';
@@ -78,6 +79,7 @@ class MyApp extends StatelessWidget {
         PassengerDetails.routeName: (context) => PassengerDetails(),
         PaymentDetails.routeName: (context) => PaymentDetails(),
         ProfileScreen.routeName: (context) => ProfileScreen(),
+        InvoicePage.routeName: (context) => InvoicePage(),
       },
     );
   }

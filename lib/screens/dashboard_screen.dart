@@ -1,9 +1,10 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_login/widgets.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:login_example/helpers/global.dart';
 import 'package:login_example/screens/flight_details.dart';
 import 'package:login_example/screens/insurance_details.dart';
+import 'package:login_example/screens/invoice_page.dart';
 import 'package:login_example/screens/passenger_details.dart';
 import 'package:login_example/screens/payment_details.dart';
 
@@ -41,6 +42,9 @@ class _DashboardScreenState extends State<DashboardScreen>
   @override
   void initState() {
     super.initState();
+
+    print(isLoggedIn);
+    print(userEmail);
 
     _loadingController = AnimationController(
       vsync: this,
@@ -129,7 +133,7 @@ class _DashboardScreenState extends State<DashboardScreen>
     final linearGradient = LinearGradient(colors: [
       primaryColor.shade800,
       primaryColor.shade200,
-    ]).createShader(const Rect.fromLTWH(0.0, 0.0, 418.0, 78.0));
+    ]).createShader(const Rect.fromLTWH(0.0, 0.0, 418.0, 20.0));
 
     return ScaleTransition(
       scale: _headerScaleAnimation,
@@ -140,9 +144,9 @@ class _DashboardScreenState extends State<DashboardScreen>
         offset: .5,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
-          children: const <Widget>[
-            Text('User Dashboard',
-                style: TextStyle(
+          children: <Widget>[
+            Text('Logged in as ' + userEmail,
+                style: const TextStyle(
                     fontSize: 24,
                     fontWeight: FontWeight.bold,
                     color: Colors.black)),
@@ -182,9 +186,9 @@ class _DashboardScreenState extends State<DashboardScreen>
         horizontal: 32.0,
         vertical: 10,
       ),
-      // childAspectRatio: .9,
-      // crossAxisSpacing: 5,
-      crossAxisCount: 4,
+      childAspectRatio:
+          (MediaQuery.of(context).size.width * 0.0006), // crossAxisSpacing: 5,
+      crossAxisCount: 6,
       children: [
         _buildButton(
           route: FlightDetails.routeName,
@@ -211,6 +215,12 @@ class _DashboardScreenState extends State<DashboardScreen>
           interval: const Interval(step * 2, aniInterval + step * 2),
         ),
         _buildButton(
+          route: InvoicePage.routeName,
+          icon: const Icon(FontAwesomeIcons.newspaper),
+          label: 'Generate Invoice',
+          interval: const Interval(step * 2, aniInterval + step * 2),
+        ),
+        _buildButton(
           icon: const Icon(FontAwesomeIcons.user),
           label: 'Profile',
           interval: const Interval(0, aniInterval),
@@ -234,37 +244,48 @@ class _DashboardScreenState extends State<DashboardScreen>
             color: theme.primaryColor.withOpacity(.1),
             child: Stack(
               children: <Widget>[
-                Column(
-                  children: <Widget>[
-                    const SizedBox(height: 20),
-                    Expanded(
-                      flex: 2,
-                      child: _buildHeader(theme),
-                    ),
-                    Expanded(
-                      flex: 8,
-                      child: ShaderMask(
-                        // blendMode: BlendMode.srcOver,
-                        shaderCallback: (Rect bounds) {
-                          return LinearGradient(
-                            begin: Alignment.topLeft,
-                            end: Alignment.bottomRight,
-                            tileMode: TileMode.clamp,
-                            colors: <Color>[
-                              Colors.deepPurpleAccent.shade100,
-                              Colors.deepPurple.shade100,
-                              Colors.deepPurple.shade100,
-                              Colors.deepPurple.shade100,
-                              // Colors.red,
-                              // Colors.yellow,
-                            ],
-                          ).createShader(bounds);
-                        },
-                        child: _buildDashboardGrid(),
+                if (isLoggedIn)
+                  Column(
+                    children: <Widget>[
+                      const SizedBox(height: 20),
+                      Expanded(
+                        flex: 2,
+                        child: _buildHeader(theme),
                       ),
+                      Expanded(
+                        flex: 8,
+                        child: ShaderMask(
+                          // blendMode: BlendMode.srcOver,
+                          shaderCallback: (Rect bounds) {
+                            return LinearGradient(
+                              begin: Alignment.topLeft,
+                              end: Alignment.bottomRight,
+                              tileMode: TileMode.clamp,
+                              colors: <Color>[
+                                Colors.deepPurpleAccent.shade100,
+                                Colors.deepPurple.shade100,
+                                Colors.deepPurple.shade100,
+                                Colors.deepPurple.shade100,
+                                // Colors.red,
+                                // Colors.yellow,
+                              ],
+                            ).createShader(bounds);
+                          },
+                          child: _buildDashboardGrid(),
+                        ),
+                      ),
+                    ],
+                  ),
+                if (!isLoggedIn)
+                  const Center(
+                    child: Text(
+                      "Please Log In To Continue",
+                      style: TextStyle(
+                          fontSize: 48,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.red),
                     ),
-                  ],
-                ),
+                  )
               ],
             ),
           ),

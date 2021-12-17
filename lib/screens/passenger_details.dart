@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:login_example/components/blog.dart';
+import 'package:login_example/helpers/global.dart';
+import 'package:login_example/screens/insurance_details.dart';
 
 import '../helpers/database_connection.dart';
 import 'dashboard_screen.dart';
@@ -14,7 +16,9 @@ class PassengerDetails extends StatefulWidget {
 }
 
 class _PassengerDetailsState extends State<PassengerDetails> {
-  int numberOfPassengers = 1;
+  int passIndex = 1;
+  int number = 1;
+
   String firstName = '';
   List firstNames = [];
 
@@ -52,15 +56,21 @@ class _PassengerDetailsState extends State<PassengerDetails> {
   @override
   Widget build(BuildContext context) {
     // final args = ModalRoute.of(context)!.settings.arguments as UsernamePass;
-
-    return Scaffold(
-      body: Stack(
-        children: <Widget>[
-          SingleChildScrollView(
-            child: Container(
-              margin: const EdgeInsets.symmetric(horizontal: 32),
-              child: Column(
-                children: <Widget>[
+    if (!isLoggedIn) {
+      return const Center(
+          child: Text(
+        "Please Log In To Continue",
+        style: TextStyle(
+            fontSize: 48, fontWeight: FontWeight.bold, color: Colors.red),
+      ));
+    } else {
+      return Scaffold(
+        body: Stack(
+          children: <Widget>[
+            SingleChildScrollView(
+              child: Container(
+                margin: const EdgeInsets.symmetric(horizontal: 32),
+                child: Column(children: <Widget>[
                   MenuBar(),
                   Card(
                     color: Colors.blue.shade100,
@@ -89,8 +99,7 @@ class _PassengerDetailsState extends State<PassengerDetails> {
                           width: 400,
 
                           child: TextField(
-                            onChanged: (text) =>
-                                numberOfPassengers = int.parse(text),
+                            onChanged: (text) => number = int.parse(text),
                             decoration: InputDecoration(
                               hintText: "Enter Number of Passengers",
                               filled: true,
@@ -109,9 +118,7 @@ class _PassengerDetailsState extends State<PassengerDetails> {
                         padding: const EdgeInsets.all(8.0),
                         child: ElevatedButton(
                             onPressed: () {
-                              setState(() {
-                                numberOfPassengers;
-                              });
+                              numberOfPassengers.value = number;
                             },
                             child: const Text("Update")),
                       )
@@ -172,7 +179,7 @@ class _PassengerDetailsState extends State<PassengerDetails> {
                         child: TextField(
                           onChanged: (text) => birthday = text,
                           decoration: InputDecoration(
-                            hintText: "Birthdate",
+                            hintText: "Birthdate (DD/MM/YYYY)",
                             filled: true,
                             fillColor: Colors.purple.withOpacity(.1),
                             contentPadding: const EdgeInsets.all(15),
@@ -191,7 +198,7 @@ class _PassengerDetailsState extends State<PassengerDetails> {
                         child: TextField(
                           onChanged: (text) => gender = text,
                           decoration: InputDecoration(
-                            hintText: "Gender",
+                            hintText: "Gender (M/F/T)",
                             filled: true,
                             fillColor: Colors.purple.withOpacity(.1),
                             contentPadding: const EdgeInsets.all(15),
@@ -214,7 +221,7 @@ class _PassengerDetailsState extends State<PassengerDetails> {
                         width: 400,
 
                         child: TextField(
-                          onChanged: (text) => numberOfPassengers = text as int,
+                          onChanged: (text) => passportNumber = text,
                           decoration: InputDecoration(
                             hintText: "Passport Number",
                             filled: true,
@@ -234,7 +241,7 @@ class _PassengerDetailsState extends State<PassengerDetails> {
                         child: TextField(
                           onChanged: (text) => passportExpire = text,
                           decoration: InputDecoration(
-                            hintText: "Passport Expiry",
+                            hintText: "Passport Expiry (DD/MM/YYYY)",
                             filled: true,
                             fillColor: Colors.purple.withOpacity(.1),
                             contentPadding: const EdgeInsets.all(15),
@@ -250,7 +257,7 @@ class _PassengerDetailsState extends State<PassengerDetails> {
                   ),
                   divider,
                   Center(
-                    child: Container(
+                    child: SizedBox(
                       width: 400,
                       child: TextField(
                         onChanged: (text) => nationality = text,
@@ -270,14 +277,42 @@ class _PassengerDetailsState extends State<PassengerDetails> {
                   ),
                   const SizedBox(height: 20),
                   ElevatedButton(
-                      onPressed: print2, child: const Text("Submit")),
-                ],
+                    onPressed: print2,
+                    child: ValueListenableBuilder(
+                      valueListenable: numberOfPassengers,
+                      builder:
+                          (BuildContext context, int value, Widget? child) {
+                        return GestureDetector(
+                          onTap: () {
+                            if (passIndex != numberOfPassengers.value) {
+                              setState(
+                                () {
+                                  passIndex++;
+                                },
+                              );
+                            } else {
+                              Navigator.pushNamed(
+                                  context, InsuranceDetails.routeName);
+                            }
+                          },
+                          child: Text(
+                            "Submit Passenger " +
+                                passIndex.toString() +
+                                " of " +
+                                numberOfPassengers.value.toString(),
+                            style: const TextStyle(fontSize: 24),
+                          ),
+                        );
+                      },
+                    ),
+                  ),
+                ]),
               ),
-            ),
-          ),
-        ],
-      ),
-      backgroundColor: Colors.white60,
-    );
+            )
+          ],
+        ),
+        backgroundColor: Colors.white60,
+      );
+    }
   }
 }

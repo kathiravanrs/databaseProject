@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:login_example/helpers/global.dart';
 
 class FlightCard extends StatefulWidget {
   String airlines;
@@ -92,8 +93,12 @@ class _FlightCardState extends State<FlightCard> {
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: ElevatedButton(
-              onPressed: () {},
-              child: Text("Select"),
+              onPressed: () {
+                departure.value = widget.dept;
+                print(widget.dept + " " + widget.arrival);
+                arrival.value = widget.arrival;
+              },
+              child: const Text("Select"),
             ),
           ),
         ],

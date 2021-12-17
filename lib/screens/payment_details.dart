@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:login_example/components/blog.dart';
+import 'package:login_example/helpers/global.dart';
 
 import '../helpers/database_connection.dart';
 import 'dashboard_screen.dart';
@@ -35,116 +36,124 @@ class _PaymentDetailsState extends State<PaymentDetails> {
   @override
   Widget build(BuildContext context) {
     // final args = ModalRoute.of(context)!.settings.arguments as UsernamePass;
+    if (!isLoggedIn) {
+      return const Center(
+          child: Text(
+        "Please Log In To Continue",
+        style: TextStyle(
+            fontSize: 48, fontWeight: FontWeight.bold, color: Colors.red),
+      ));
+    } else {
+      return Scaffold(
+        body: Stack(
+          children: <Widget>[
+            SingleChildScrollView(
+              child: Container(
+                margin: const EdgeInsets.symmetric(horizontal: 32),
+                child: Column(
+                  children: <Widget>[
+                    MenuBar(),
+                    Card(
+                      color: Colors.blue.shade100,
+                      elevation: 5,
+                      margin: const EdgeInsets.only(top: 15),
+                      // shape: ContinuousRectangleBorder(
+                      //   borderRadius: BorderRadius.circular(100.0),
+                      // ),
+                      child: const Text(
+                        'Enter Your Payment Details',
+                        style: TextStyle(fontSize: 32),
+                      ),
+                    ),
+                    divider,
+                    Container(
+                      // padding: EdgeInsets.all(20),
+                      width: 600,
 
-    return Scaffold(
-      body: Stack(
-        children: <Widget>[
-          SingleChildScrollView(
-            child: Container(
-              margin: const EdgeInsets.symmetric(horizontal: 32),
-              child: Column(
-                children: <Widget>[
-                  MenuBar(),
-                  Card(
-                    color: Colors.blue.shade100,
-                    elevation: 5,
-                    margin: const EdgeInsets.only(top: 15),
-                    // shape: ContinuousRectangleBorder(
-                    //   borderRadius: BorderRadius.circular(100.0),
-                    // ),
-                    child: const Text(
-                      'Enter Your Payment Details',
-                      style: TextStyle(fontSize: 32),
-                    ),
-                  ),
-                  divider,
-                  Container(
-                    // padding: EdgeInsets.all(20),
-                    width: 600,
-
-                    child: TextField(
-                      onChanged: (text) => mealPlanID = text,
-                      decoration: InputDecoration(
-                        hintText: "Enter your card number",
-                        filled: true,
-                        fillColor: Colors.purple.withOpacity(.1),
-                        contentPadding: const EdgeInsets.all(15),
-                        errorStyle: const TextStyle(
-                          backgroundColor: Colors.orange,
-                          color: Colors.white,
+                      child: TextField(
+                        onChanged: (text) => mealPlanID = text,
+                        decoration: InputDecoration(
+                          hintText: "Enter your card number",
+                          filled: true,
+                          fillColor: Colors.purple.withOpacity(.1),
+                          contentPadding: const EdgeInsets.all(15),
+                          errorStyle: const TextStyle(
+                            backgroundColor: Colors.orange,
+                            color: Colors.white,
+                          ),
+                          labelStyle: const TextStyle(fontSize: 12),
                         ),
-                        labelStyle: const TextStyle(fontSize: 12),
                       ),
                     ),
-                  ),
-                  divider,
-                  Container(
-                    width: 600,
-                    // margin: EdgeInsets.all(20),
-                    child: TextField(
-                      onChanged: (text) => cabinClassID = text,
-                      decoration: InputDecoration(
-                        hintText: "Name on the card",
-                        filled: true,
-                        fillColor: Colors.purple.withOpacity(.1),
-                        contentPadding: const EdgeInsets.all(15),
-                        errorStyle: const TextStyle(
-                          backgroundColor: Colors.orange,
-                          color: Colors.white,
+                    divider,
+                    Container(
+                      width: 600,
+                      // margin: EdgeInsets.all(20),
+                      child: TextField(
+                        onChanged: (text) => cabinClassID = text,
+                        decoration: InputDecoration(
+                          hintText: "Name on the card",
+                          filled: true,
+                          fillColor: Colors.purple.withOpacity(.1),
+                          contentPadding: const EdgeInsets.all(15),
+                          errorStyle: const TextStyle(
+                            backgroundColor: Colors.orange,
+                            color: Colors.white,
+                          ),
+                          labelStyle: const TextStyle(fontSize: 12),
                         ),
-                        labelStyle: const TextStyle(fontSize: 12),
                       ),
                     ),
-                  ),
-                  divider,
-                  Container(
-                    // padding: EdgeInsets.all(20),
-                    width: 600,
-                    child: TextField(
-                      onChanged: (text) => specialRequestID = text,
-                      decoration: InputDecoration(
-                        hintText: "Expiry month and Year (MM/YY)",
-                        filled: true,
-                        fillColor: Colors.purple.withOpacity(.1),
-                        contentPadding: const EdgeInsets.all(15),
-                        errorStyle: const TextStyle(
-                          backgroundColor: Colors.orange,
-                          color: Colors.white,
+                    divider,
+                    Container(
+                      // padding: EdgeInsets.all(20),
+                      width: 600,
+                      child: TextField(
+                        onChanged: (text) => specialRequestID = text,
+                        decoration: InputDecoration(
+                          hintText: "Expiry month and Year (MM/YY)",
+                          filled: true,
+                          fillColor: Colors.purple.withOpacity(.1),
+                          contentPadding: const EdgeInsets.all(15),
+                          errorStyle: const TextStyle(
+                            backgroundColor: Colors.orange,
+                            color: Colors.white,
+                          ),
+                          labelStyle: const TextStyle(fontSize: 12),
                         ),
-                        labelStyle: const TextStyle(fontSize: 12),
                       ),
                     ),
-                  ),
-                  divider,
-                  Container(
-                    // padding: EdgeInsets.all(20),
-                    width: 600,
-                    child: TextField(
-                      onChanged: (text) => specialRequestID = text,
-                      decoration: InputDecoration(
-                        hintText: "CVV",
-                        filled: true,
-                        fillColor: Colors.purple.withOpacity(.1),
-                        contentPadding: const EdgeInsets.all(15),
-                        errorStyle: const TextStyle(
-                          backgroundColor: Colors.orange,
-                          color: Colors.white,
+                    divider,
+                    Container(
+                      // padding: EdgeInsets.all(20),
+                      width: 600,
+                      child: TextField(
+                        onChanged: (text) => specialRequestID = text,
+                        decoration: InputDecoration(
+                          hintText: "CVV",
+                          filled: true,
+                          fillColor: Colors.purple.withOpacity(.1),
+                          contentPadding: const EdgeInsets.all(15),
+                          errorStyle: const TextStyle(
+                            backgroundColor: Colors.orange,
+                            color: Colors.white,
+                          ),
+                          labelStyle: const TextStyle(fontSize: 12),
                         ),
-                        labelStyle: const TextStyle(fontSize: 12),
                       ),
                     ),
-                  ),
-                  divider,
-                  const SizedBox(height: 20),
-                  ElevatedButton(
-                      onPressed: print2, child: const Text("Submit")),
-                ],
+                    divider,
+                    const SizedBox(height: 20),
+                    ElevatedButton(
+                        onPressed: print2, child: const Text("Submit")),
+                  ],
+                ),
               ),
             ),
-          ),
-        ],
-      ),
-      backgroundColor: Colors.white60,
-    );
+          ],
+        ),
+        backgroundColor: Colors.white60,
+      );
+    }
   }
 }
