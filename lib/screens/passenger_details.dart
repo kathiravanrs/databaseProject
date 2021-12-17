@@ -20,25 +20,18 @@ class _PassengerDetailsState extends State<PassengerDetails> {
   int number = 1;
 
   String firstName = '';
-  List firstNames = [];
 
   String lastName = '';
-  List lastNames = [];
 
   String birthday = '';
-  List birthdays = [];
 
   String nationality = '';
-  List nationalities = [];
 
   String gender = '';
-  List genders = [];
 
   String passportNumber = '';
-  List passportNumbers = [];
 
   String passportExpire = '';
-  List passportExpires = [];
 
   void print2() {
     Navigator.pushNamed(context, DashboardScreen.routeName);
@@ -179,7 +172,7 @@ class _PassengerDetailsState extends State<PassengerDetails> {
                         child: TextField(
                           onChanged: (text) => birthday = text,
                           decoration: InputDecoration(
-                            hintText: "Birthdate (DD/MM/YYYY)",
+                            hintText: "Birthdate (YYYY-MM-DD)",
                             filled: true,
                             fillColor: Colors.purple.withOpacity(.1),
                             contentPadding: const EdgeInsets.all(15),
@@ -241,7 +234,7 @@ class _PassengerDetailsState extends State<PassengerDetails> {
                         child: TextField(
                           onChanged: (text) => passportExpire = text,
                           decoration: InputDecoration(
-                            hintText: "Passport Expiry (DD/MM/YYYY)",
+                            hintText: "Passport Expiry  (YYYY-MM-DD)",
                             filled: true,
                             fillColor: Colors.purple.withOpacity(.1),
                             contentPadding: const EdgeInsets.all(15),
@@ -284,9 +277,35 @@ class _PassengerDetailsState extends State<PassengerDetails> {
                           (BuildContext context, int value, Widget? child) {
                         return GestureDetector(
                           onTap: () {
+                            postData("passenger", [
+                              'emailid',
+                              'p_fname',
+                              'p_lname',
+                              'p_birthdate',
+                              'p_nationality',
+                              'p_gender',
+                              'p_pportnum',
+                              'p_pportexdate'
+                            ], [
+                              "'" + userEmail + "'",
+                              "'" + firstName + "'",
+                              "'" + lastName + "'",
+                              "'" + birthday + "'",
+                              "'" + nationality + "'",
+                              "'" + gender + "'",
+                              "'" + passportNumber + "'",
+                              "'" + passportExpire + "'"
+                            ]);
                             if (passIndex != numberOfPassengers.value) {
                               setState(
                                 () {
+                                  firstName = '';
+                                  lastName = '';
+                                  birthday = '';
+                                  nationality = '';
+                                  gender = '';
+                                  passportExpire = '';
+                                  passportNumber = '';
                                   passIndex++;
                                 },
                               );

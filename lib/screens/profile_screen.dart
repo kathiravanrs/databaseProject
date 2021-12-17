@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:login_example/components/blog.dart';
+import 'package:login_example/screens/update_registration.dart';
 
 import '../helpers/database_connection.dart';
-import 'dashboard_screen.dart';
 
 class ProfileScreen extends StatefulWidget {
   static const routeName = '/profile_screen';
@@ -13,13 +13,8 @@ class ProfileScreen extends StatefulWidget {
 }
 
 class _ProfileScreenState extends State<ProfileScreen> {
-  String mealPlanID = '';
-  String cabinClassID = 'firstName';
-  String specialRequestID = 'lastName';
-
   void print2() {
-    print(mealPlanID + " " + cabinClassID + " " + specialRequestID);
-    Navigator.pushNamed(context, DashboardScreen.routeName);
+    // Navigator.pushNamed(context, DashboardScreen.routeName);
   }
 
   void onSubmit() {
@@ -48,76 +43,37 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     color: Colors.blue.shade100,
                     elevation: 5,
                     margin: const EdgeInsets.only(top: 15),
-                    // shape: ContinuousRectangleBorder(
-                    //   borderRadius: BorderRadius.circular(100.0),
-                    // ),
-                    child: const Text(
-                      'Profile Details',
-                      style: TextStyle(fontSize: 32),
-                    ),
-                  ),
-                  divider,
-                  Container(
-                    // padding: EdgeInsets.all(20),
-                    width: 600,
-
-                    child: TextField(
-                      onChanged: (text) => mealPlanID = text,
-                      decoration: InputDecoration(
-                        hintText: "Choose Meal Plan",
-                        filled: true,
-                        fillColor: Colors.purple.withOpacity(.1),
-                        contentPadding: const EdgeInsets.all(15),
-                        errorStyle: const TextStyle(
-                          backgroundColor: Colors.orange,
-                          color: Colors.white,
-                        ),
-                        labelStyle: const TextStyle(fontSize: 12),
-                      ),
-                    ),
-                  ),
-                  divider,
-                  Container(
-                    width: 600,
-                    // margin: EdgeInsets.all(20),
-                    child: TextField(
-                      onChanged: (text) => cabinClassID = text,
-                      decoration: InputDecoration(
-                        hintText: "Enter cabin class",
-                        filled: true,
-                        fillColor: Colors.purple.withOpacity(.1),
-                        contentPadding: const EdgeInsets.all(15),
-                        errorStyle: const TextStyle(
-                          backgroundColor: Colors.orange,
-                          color: Colors.white,
-                        ),
-                        labelStyle: const TextStyle(fontSize: 12),
-                      ),
-                    ),
-                  ),
-                  divider,
-                  Container(
-                    // padding: EdgeInsets.all(20),
-                    width: 600,
-                    child: TextField(
-                      onChanged: (text) => specialRequestID = text,
-                      decoration: InputDecoration(
-                        hintText: "Enter Special Request",
-                        filled: true,
-                        fillColor: Colors.purple.withOpacity(.1),
-                        contentPadding: const EdgeInsets.all(15),
-                        errorStyle: const TextStyle(
-                          backgroundColor: Colors.orange,
-                          color: Colors.white,
-                        ),
-                        labelStyle: const TextStyle(fontSize: 12),
+                    child: const Padding(
+                      padding: EdgeInsets.all(8.0),
+                      child: Text(
+                        'Profile',
+                        style: TextStyle(fontSize: 32),
                       ),
                     ),
                   ),
                   divider,
                   const SizedBox(height: 20),
-                  ElevatedButton(
-                      onPressed: print2, child: const Text("Submit")),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      ElevatedButton(
+                          onPressed: () {
+                            Navigator.pushNamed(
+                                context, UpdateRegistrationScreen.routeName);
+                          },
+                          child: const Text(
+                            "View/Update your Profile",
+                            style: TextStyle(fontSize: 32),
+                          )),
+                      ElevatedButton(
+                          style: ElevatedButton.styleFrom(primary: Colors.red),
+                          onPressed: () {},
+                          child: const Text(
+                            "Delete Your Account",
+                            style: TextStyle(fontSize: 32),
+                          ))
+                    ],
+                  ),
                 ],
               ),
             ),

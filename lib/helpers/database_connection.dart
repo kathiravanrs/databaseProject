@@ -5,9 +5,10 @@ import 'package:http/http.dart' as http;
 
 List<String> allQueries = [
   "SELECT * from users",
-  "SELECT * from userpass",
-  "SELECT * from sk_ks_passenger",
-  "SELECT * from sk_ks_customer",
+  "SELECT * from passenger",
+  // "SELECT * from userpass",
+  // "SELECT * from sk_ks_passenger",
+  // "SELECT * from sk_ks_customer",
   "SELECT * from sk_ks_agdetails",
   "SELECT * from sk_ks_membership",
   "SELECT * from sk_ks_iplan",
@@ -65,6 +66,30 @@ Future postData(String table, List<String> column, List<String> values) async {
       Uri.parse('https://databaseprojectfall21.000webhostapp.com/post.php');
   http.Response response = await http.post(url, body: query);
   print('posted');
+  print(response.body.toString());
+}
+
+Future updateData(
+    String table, List<String> column, List<String> values) async {
+  print(column.toString());
+  print(values.toString());
+  String set = ' ';
+  for (int i = 0; i < column.length; i++) {
+    if (values[i].isNotEmpty) {
+      set = set + column[i] + " = " + values[i];
+      if (i < column.length - 1) {
+        set = set + ",";
+      }
+    }
+  }
+  print(set);
+  String query =
+      "Update " + table + " Set " + set + " where email='vc@gmail.com'";
+  print(query);
+  var url =
+      Uri.parse('https://databaseprojectfall21.000webhostapp.com/post.php');
+  http.Response response = await http.post(url, body: query);
+  print('updated');
   print(response.body.toString());
 }
 

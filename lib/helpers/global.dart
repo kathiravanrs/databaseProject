@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 bool isLoggedIn = true;
 
-String userEmail = 'default@def.com';
+String userEmail = 'kathi@gmail.com';
 
 String fromCity = '';
 String toCity = '';

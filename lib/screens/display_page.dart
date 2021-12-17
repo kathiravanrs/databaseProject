@@ -29,7 +29,7 @@ class _DisplayPageState extends State<DisplayPage> {
       return SafeArea(
         child: Scaffold(
           appBar: AppBar(
-            title: const Text("Manager Data View"),
+            title: const Text("View All Tables"),
             leading: const Icon(
               Icons.home,
             ),

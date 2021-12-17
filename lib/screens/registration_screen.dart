@@ -1,7 +1,9 @@
 // ignore_for_file: sized_box_for_whitespace
 
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:login_example/components/blog.dart';
+import 'package:login_example/components/color.dart';
 import 'package:login_example/screens/login_screen.dart';
 
 import '../helpers/database_connection.dart';
@@ -82,7 +84,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
         "'" + gender + "'",
         "'" + customerType + "'",
         "'" + email + "'",
-        "'" + pass + "'",
+        "'" + encode(pass) + "'",
       ]);
       Navigator.pushNamed(context, LoginScreen.routeName);
     }
@@ -102,7 +104,21 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
               margin: const EdgeInsets.symmetric(horizontal: 32),
               child: Column(
                 children: <Widget>[
-                  MenuBar(),
+                  Container(
+                    margin: const EdgeInsets.symmetric(vertical: 30),
+                    child: Row(
+                      children: <Widget>[
+                        Text(
+                          "Safe Fly Management Excellence",
+                          style: GoogleFonts.montserrat(
+                              color: textPrimary,
+                              fontSize: 30,
+                              letterSpacing: 3,
+                              fontWeight: FontWeight.w500),
+                        ),
+                      ],
+                    ),
+                  ),
                   Card(
                     color: Colors.blue.shade100,
                     elevation: 5,

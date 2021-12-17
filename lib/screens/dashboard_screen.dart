@@ -7,6 +7,7 @@ import 'package:login_example/screens/insurance_details.dart';
 import 'package:login_example/screens/invoice_page.dart';
 import 'package:login_example/screens/passenger_details.dart';
 import 'package:login_example/screens/payment_details.dart';
+import 'package:login_example/screens/profile_screen.dart';
 
 import '../helpers/constants.dart';
 import '../helpers/transition_route_observer.dart';
@@ -224,6 +225,7 @@ class _DashboardScreenState extends State<DashboardScreen>
           interval: const Interval(step * 2, aniInterval + step * 2),
         ),
         _buildButton(
+          route: ProfileScreen.routeName,
           icon: const Icon(FontAwesomeIcons.user),
           label: 'Profile',
           interval: const Interval(0, aniInterval),

@@ -268,10 +268,12 @@ class ListItem extends StatelessWidget {
     return Column(
       children: <Widget>[
         if (imageUrl != null)
-          ImageWrapper(
-            height: 200,
-            width: 400,
-            image: imageUrl!,
+          Container(
+            child: ImageWrapper(
+              height: 200,
+              width: 400,
+              image: imageUrl!,
+            ),
           ),
         Align(
           alignment: Alignment.centerLeft,
@@ -338,7 +340,9 @@ class MenuBar extends StatelessWidget {
                           style: buttonTextStyle,
                         ),
                       ),
-                      SizedBox(width: 20,),
+                      SizedBox(
+                        width: 20,
+                      ),
                       ElevatedButton(
                         onPressed: () {
                           Navigator.pushNamed(context, LoginScreen.routeName);

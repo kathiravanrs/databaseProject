@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:login_example/components/page_list.dart';
 import 'package:login_example/screens/display_page.dart';
 import 'package:login_example/screens/flight_details.dart';
+import 'package:login_example/screens/home_page.dart';
 import 'package:login_example/screens/insurance_details.dart';
 import 'package:login_example/screens/invoice_page.dart';
 import 'package:login_example/screens/passenger_details.dart';
 import 'package:login_example/screens/payment_details.dart';
 import 'package:login_example/screens/profile_screen.dart';
 import 'package:login_example/screens/registration_screen.dart';
+import 'package:login_example/screens/update_registration.dart';
 
 import 'helpers/transition_route_observer.dart';
 import 'screens/dashboard_screen.dart';
@@ -80,6 +81,8 @@ class MyApp extends StatelessWidget {
         PaymentDetails.routeName: (context) => PaymentDetails(),
         ProfileScreen.routeName: (context) => ProfileScreen(),
         InvoicePage.routeName: (context) => InvoicePage(),
+        UpdateRegistrationScreen.routeName: (context) =>
+            UpdateRegistrationScreen(),
       },
     );
   }
