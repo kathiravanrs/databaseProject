@@ -12,4 +12,8 @@ final arrival = ValueNotifier("arr");
 
 final numberOfPassengers = ValueNotifier(1);
 
-final chosenInsurance = ValueNotifier(0);
+final chosenInsuranceCount = ValueNotifier(0);
+
+var insuranceCount = {};
+var insuranceCost = {};
+var insuranceDesc = {};

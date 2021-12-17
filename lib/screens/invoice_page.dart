@@ -22,6 +22,7 @@ class _InvoicePageState extends State<InvoicePage> with WidgetsBindingObserver {
   String _email = '';
   Product? _product;
   Invoice? _invoice;
+  List<Product> prod = [];
 
   @override
   initState() {
@@ -46,10 +47,21 @@ class _InvoicePageState extends State<InvoicePage> with WidgetsBindingObserver {
         firstName: "Kathiravan", email: "Kathiravanrs@hotmail.com");
     client = await InvoiceNinja.clients.save(client);
 
-    var invoice = Invoice.forClient(client, products: [
-      Product(
-          productKey: "teal", notes: "hello", cost: 20, quantity: 5, price: 30)
-    ]);
+    insuranceCount.forEach((key, value) {
+      if (value > 0) {
+        print(value.toString() + " " + key.toString());
+        prod.add(Product(
+          productKey: key,
+          cost: double.parse(insuranceCost[key].toString()),
+          notes: insuranceDesc[key].toString(),
+          quantity: value,
+          price: double.parse(insuranceCost[key].toString()),
+        ));
+      }
+    });
+    print(prod.toString());
+
+    var invoice = Invoice.forClient(client, products: prod);
     invoice = await InvoiceNinja.invoices.save(invoice);
 
     setState(() {
@@ -75,10 +87,6 @@ class _InvoicePageState extends State<InvoicePage> with WidgetsBindingObserver {
     }
 
     final invoice = await InvoiceNinja.invoices.findByKey(_invoice!.key);
-
-    if (invoice.isPaid) {
-      // ...
-    }
   }
 
   @override

@@ -21,6 +21,8 @@ class InsuranceCard extends StatefulWidget {
 class _InsuranceCardState extends State<InsuranceCard> {
   @override
   Widget build(BuildContext context) {
+    insuranceCost[widget.name] = widget.cost;
+    insuranceDesc[widget.name] = widget.desc;
     return Card(
       color: Colors.blue.shade50,
       elevation: 7,
@@ -66,10 +68,14 @@ class _InsuranceCardState extends State<InsuranceCard> {
                 child: ElevatedButton(
                   onPressed: () {
                     if (widget.number != 0) {
-                      chosenInsurance.value--;
+                      chosenInsuranceCount.value--;
                       setState(() {
                         widget.number--;
                       });
+                      insuranceCount[widget.name] = widget.number;
+                      print(insuranceCount[widget.name].toString() +
+                          " " +
+                          widget.name);
                     }
                   },
                   child: const Text(
@@ -86,10 +92,14 @@ class _InsuranceCardState extends State<InsuranceCard> {
                 padding: const EdgeInsets.all(8.0),
                 child: ElevatedButton(
                   onPressed: () {
-                    chosenInsurance.value++;
+                    chosenInsuranceCount.value++;
                     setState(() {
                       widget.number++;
                     });
+                    insuranceCount[widget.name] = widget.number;
+                    print(insuranceCount[widget.name].toString() +
+                        " " +
+                        widget.name);
                   },
                   child: const Text(
                     "+",

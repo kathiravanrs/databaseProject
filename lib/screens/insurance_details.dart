@@ -66,13 +66,10 @@ class _InsuranceDetailsState extends State<InsuranceDetails> {
                     horizontal: 32.0,
                     vertical: 10,
                   ),
-                  // scrollDirection: Axis.vertical,
                   shrinkWrap: true,
-                  // crossAxisAlignment: CrossAxisAlignment.start,
                   crossAxisCount: 3,
                   childAspectRatio:
                       (MediaQuery.of(context).size.height * 0.0006 * 2.05),
-
                   children: data
                       .map((item) => Padding(
                             padding: const EdgeInsets.all(8.0),
@@ -111,7 +108,7 @@ class _InsuranceDetailsState extends State<InsuranceDetails> {
                             ),
                           ),
                           ValueListenableBuilder(
-                              valueListenable: chosenInsurance,
+                              valueListenable: chosenInsuranceCount,
                               builder: (context, value, child) {
                                 return Center(
                                   child: Card(
@@ -125,9 +122,10 @@ class _InsuranceDetailsState extends State<InsuranceDetails> {
                                             numberOfPassengers.value
                                                 .toString() +
                                             ".  Selected Insurance Plans " +
-                                            chosenInsurance.value.toString(),
+                                            chosenInsuranceCount.value
+                                                .toString(),
                                         style: const TextStyle(
-                                            fontSize: 32,
+                                            fontSize: 18,
                                             fontWeight: FontWeight.bold),
                                       ),
                                     ),
@@ -139,7 +137,7 @@ class _InsuranceDetailsState extends State<InsuranceDetails> {
                           const SizedBox(height: 20),
                           ElevatedButton(
                               onPressed: () {
-                                if (chosenInsurance.value ==
+                                if (chosenInsuranceCount.value ==
                                     numberOfPassengers.value) {
                                   Navigator.pushNamed(
                                       context, PaymentDetails.routeName);
