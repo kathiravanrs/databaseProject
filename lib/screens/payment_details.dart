@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:login_example/components/blog.dart';
 import 'package:login_example/helpers/global.dart';
+import 'package:login_example/screens/invoice_page.dart';
 
 import '../helpers/database_connection.dart';
-import 'dashboard_screen.dart';
 
 class PaymentDetails extends StatefulWidget {
   static const routeName = '/payment_details';
@@ -15,14 +15,10 @@ class PaymentDetails extends StatefulWidget {
 }
 
 class _PaymentDetailsState extends State<PaymentDetails> {
-  String mealPlanID = '';
-  String cabinClassID = 'firstName';
-  String specialRequestID = 'lastName';
-
-  void print2() {
-    print(mealPlanID + " " + cabinClassID + " " + specialRequestID);
-    Navigator.pushNamed(context, DashboardScreen.routeName);
-  }
+  String cardNum = '';
+  String nameOnCard = '';
+  String expiryMonth = '';
+  String cvv = '';
 
   void onSubmit() {
     getData("test");
@@ -71,7 +67,7 @@ class _PaymentDetailsState extends State<PaymentDetails> {
                       width: 600,
 
                       child: TextField(
-                        onChanged: (text) => mealPlanID = text,
+                        onChanged: (text) => cardNum = text,
                         decoration: InputDecoration(
                           hintText: "Enter your card number",
                           filled: true,
@@ -90,7 +86,7 @@ class _PaymentDetailsState extends State<PaymentDetails> {
                       width: 600,
                       // margin: EdgeInsets.all(20),
                       child: TextField(
-                        onChanged: (text) => cabinClassID = text,
+                        onChanged: (text) => nameOnCard = text,
                         decoration: InputDecoration(
                           hintText: "Name on the card",
                           filled: true,
@@ -109,7 +105,7 @@ class _PaymentDetailsState extends State<PaymentDetails> {
                       // padding: EdgeInsets.all(20),
                       width: 600,
                       child: TextField(
-                        onChanged: (text) => specialRequestID = text,
+                        onChanged: (text) => expiryMonth = text,
                         decoration: InputDecoration(
                           hintText: "Expiry month and Year (MM/YY)",
                           filled: true,
@@ -128,7 +124,7 @@ class _PaymentDetailsState extends State<PaymentDetails> {
                       // padding: EdgeInsets.all(20),
                       width: 600,
                       child: TextField(
-                        onChanged: (text) => specialRequestID = text,
+                        onChanged: (text) => cvv = text,
                         decoration: InputDecoration(
                           hintText: "CVV",
                           filled: true,
@@ -145,7 +141,22 @@ class _PaymentDetailsState extends State<PaymentDetails> {
                     divider,
                     const SizedBox(height: 20),
                     ElevatedButton(
-                        onPressed: print2, child: const Text("Submit")),
+                        onPressed: () {
+                          if (cvv.isEmpty ||
+                              nameOnCard.isEmpty ||
+                              cardNum.isEmpty ||
+                              expiryMonth.isEmpty) {
+                            ScaffoldMessenger.of(context)
+                                .showSnackBar(const SnackBar(
+                              content: Text(
+                                  "Fill all the details before submitting"),
+                              backgroundColor: Colors.red,
+                            ));
+                          } else {
+                            Navigator.pushNamed(context, InvoicePage.routeName);
+                          }
+                        },
+                        child: const Text("Submit")),
                   ],
                 ),
               ),

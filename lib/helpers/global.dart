@@ -12,4 +12,4 @@ final arrival = ValueNotifier("arr");
 
 final numberOfPassengers = ValueNotifier(1);
 
-final chosenInsurance = ValueNotifier("");
+final chosenInsurance = ValueNotifier(0);

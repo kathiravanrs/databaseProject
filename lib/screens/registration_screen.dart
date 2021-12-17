@@ -88,43 +88,6 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
     }
   }
 
-  // Future getData() async {
-  //   var url =
-  //       Uri.parse('https://databaseprojectfall21.000webhostapp.com/get.php');
-  //   http.Response response = await http.get(url);
-  //   // print(response.body.toString());
-  //   var data = jsonDecode(response.body);
-  //   print(data.toString());
-  // }
-
-  // Future postData(
-  //     String table, List<String> column, List<String> values) async {
-  //   String query = "Insert into " +
-  //       table +
-  //       "(" +
-  //       column.join(", ") +
-  //       ") Values (" +
-  //       values.join(", ") +
-  //       ")";
-  //   // for (var element in column) {
-  //   //   query + element;
-  //   // }
-  //   // query += ") Values (";
-  //   // for (var element in values) {
-  //   //   query + element;
-  //   // }
-  //   // query += ")";
-  //   print(query);
-  //   var url =
-  //       Uri.parse('https://databaseprojectfall21.000webhostapp.com/post.php');
-  //   http.Response response = await http.post(url, body: query);
-  //   print('posted');
-  //   // print(response.body.toString());
-  //   print(response.body.toString());
-  //   // var data = jsonDecode(response.body);
-  //   // print(data.toString());
-  // }
-
   @override
   Widget build(BuildContext context) {
     final args = ModalRoute.of(context)!.settings.arguments as UsernamePass;
@@ -144,9 +107,6 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                     color: Colors.blue.shade100,
                     elevation: 5,
                     margin: const EdgeInsets.only(top: 15),
-                    // shape: ContinuousRectangleBorder(
-                    //   borderRadius: BorderRadius.circular(100.0),
-                    // ),
                     child: const Text(
                       'Fill out the new user registration form',
                       style: TextStyle(fontSize: 32),

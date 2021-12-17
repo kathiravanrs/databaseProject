@@ -68,13 +68,10 @@ class _FlightDetailsState extends State<FlightDetails> {
                     horizontal: 32.0,
                     vertical: 10,
                   ),
-                  // scrollDirection: Axis.vertical,
                   shrinkWrap: true,
-                  // crossAxisAlignment: CrossAxisAlignment.start,
                   crossAxisCount: 3,
                   childAspectRatio:
                       (MediaQuery.of(context).size.height * 0.0006 * 2.05),
-
                   children: data
                       .map((item) => Padding(
                             padding: const EdgeInsets.all(8.0),

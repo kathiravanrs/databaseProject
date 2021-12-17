@@ -3,6 +3,7 @@ import 'package:invoiceninja/invoiceninja.dart';
 import 'package:invoiceninja/models/client.dart';
 import 'package:invoiceninja/models/invoice.dart';
 import 'package:invoiceninja/models/product.dart';
+import 'package:login_example/components/blog.dart';
 import 'package:login_example/helpers/global.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -41,10 +42,6 @@ class _InvoicePageState extends State<InvoicePage> with WidgetsBindingObserver {
   }
 
   void _createInvoice() async {
-    if (_product == null) {
-      return;
-    }
-
     var client = Client.forContact(
         firstName: "Kathiravan", email: "Kathiravanrs@hotmail.com");
     client = await InvoiceNinja.clients.save(client);
@@ -69,15 +66,6 @@ class _InvoicePageState extends State<InvoicePage> with WidgetsBindingObserver {
       'https://docs.google.com/gview?embedded=true&url=${_invoice!.pdfUrl}',
       forceWebView: true,
     );
-  }
-
-  void _viewPortal() {
-    if (_invoice == null) {
-      return;
-    }
-
-    final invitation = _invoice!.invitations.first;
-    launch(invitation.url);
   }
 
   @override
@@ -110,9 +98,6 @@ class _InvoicePageState extends State<InvoicePage> with WidgetsBindingObserver {
       ));
     } else {
       return Scaffold(
-        appBar: AppBar(
-          title: const Text('Invoice Ninja Example'),
-        ),
         body: SingleChildScrollView(
           child: Padding(
             padding: const EdgeInsets.all(16),
@@ -123,41 +108,21 @@ class _InvoicePageState extends State<InvoicePage> with WidgetsBindingObserver {
                   mainAxisSize: MainAxisSize.min,
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
-                    TextFormField(
-                      decoration: const InputDecoration(
-                        labelText: 'Email',
-                        suffixIcon: Icon(Icons.email),
-                      ),
-                      onChanged: (value) => setState(() => _email = value),
-                      keyboardType: TextInputType.emailAddress,
-                    ),
-                    DropdownButtonFormField<Product>(
-                      decoration: const InputDecoration(
-                        labelText: 'Product',
-                      ),
-                      onChanged: (value) => setState(() => _product = value),
-                      items: _products
-                          .map((product) => DropdownMenuItem(
-                                child: Text(product.productKey),
-                                value: product,
-                              ))
-                          .toList(),
-                    ),
+                    MenuBar(),
                     const SizedBox(height: 16),
-                    OutlineButton(
+                    ElevatedButton(
                       child: const Text('Create Invoice'),
-                      onPressed: (_email.isNotEmpty && _product != null)
-                          ? () => _createInvoice()
-                          : null,
+                      onPressed: () {
+                        _createInvoice();
+                      },
                     ),
-                    OutlineButton(
+                    divider,
+                    divider,
+                    ElevatedButton(
                       child: const Text('View PDF'),
-                      onPressed: (_invoice != null) ? () => _viewPdf() : null,
-                    ),
-                    OutlineButton(
-                      child: const Text('View Portal'),
-                      onPressed:
-                          (_invoice != null) ? () => _viewPortal() : null,
+                      onPressed: () {
+                        _viewPdf();
+                      },
                     ),
                   ],
                 ),

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:login_example/screens/dashboard_screen.dart';
 import 'package:login_example/screens/login_screen.dart';
 
 import 'color.dart';
@@ -329,10 +330,21 @@ class MenuBar extends StatelessWidget {
                     children: <Widget>[
                       ElevatedButton(
                         onPressed: () {
+                          Navigator.pushNamed(
+                              context, DashboardScreen.routeName);
+                        },
+                        child: Text(
+                          "Home",
+                          style: buttonTextStyle,
+                        ),
+                      ),
+                      SizedBox(width: 20,),
+                      ElevatedButton(
+                        onPressed: () {
                           Navigator.pushNamed(context, LoginScreen.routeName);
                         },
                         child: Text(
-                          "Log In",
+                          "Log Out",
                           style: buttonTextStyle,
                         ),
                       ),

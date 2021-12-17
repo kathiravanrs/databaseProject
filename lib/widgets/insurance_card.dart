@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:login_example/helpers/global.dart';
 
 class InsuranceCard extends StatefulWidget {
   String name;
   String cost;
   String desc;
+  int number = 0;
 
   InsuranceCard({
     Key? key,
@@ -56,12 +58,46 @@ class _InsuranceCardState extends State<InsuranceCard> {
               ],
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: ElevatedButton(
-              onPressed: () {},
-              child: Text("Select"),
-            ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: ElevatedButton(
+                  onPressed: () {
+                    if (widget.number != 0) {
+                      chosenInsurance.value--;
+                      setState(() {
+                        widget.number--;
+                      });
+                    }
+                  },
+                  child: const Text(
+                    "-",
+                    style: TextStyle(fontSize: 24),
+                  ),
+                ),
+              ),
+              Text(
+                widget.number.toString(),
+                style: const TextStyle(fontSize: 24),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: ElevatedButton(
+                  onPressed: () {
+                    chosenInsurance.value++;
+                    setState(() {
+                      widget.number++;
+                    });
+                  },
+                  child: const Text(
+                    "+",
+                    style: TextStyle(fontSize: 24),
+                  ),
+                ),
+              ),
+            ],
           ),
         ],
       ),
